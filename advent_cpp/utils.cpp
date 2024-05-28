@@ -7,11 +7,15 @@
 
 #include "utils.hpp"
 
-std::vector<std::string> findAll(std::string s, std::regex r) {
+std::vector<std::vector<std::string>> findAll(std::string s, std::regex r) {
 	std::string sc = s;
-	std::vector<std::string> (matches);
+	std::vector<std::vector<std::string>> (matches);
 	for (std::smatch sm; std::regex_search(sc, sm, r); ) {
-		matches.push_back(sm[1].str());
+		std::vector<std::string> v = {};
+		for (int i = 1; i < sm.size(); ++i) {
+			v.push_back(sm[i].str());
+		}
+		matches.push_back(v);
 		sc = sm.suffix();
 	}
 	return matches;
@@ -30,9 +34,30 @@ std::string join(std::vector<std::string> v, char delim) {
 	return j;
 }
 
-ptrdiff_t indexOf(std::string s, std::vector<std::string> v) {
-	return std::distance(v.begin(), find(v.begin(), v.end(), s));
-};
+std::string join(std::vector<int> v, char delim) {
+	std::vector<std::string> t(v.size());
+	std::transform(v.cbegin(), v.cend(), t.begin(), [](int n) { return std::to_string(n); });
+	return join(t);
+}
+
+ptrdiff_t indexOf(std::string s, std::vector<std::string> v, unsigned long start) {
+	return std::distance(v.begin() + start, find(v.begin() + start, v.end(), s));
+}
+
+void print()  {
+	
+}
+
+void printStrings(std::vector<std::string> v) {
+	std::cout << "[" << join(v) << "]\n";
+}
+
+std::vector<std::string> reSplit(std::regex r, std::string s) {
+	return {
+		std::sregex_token_iterator(s.begin(), s.end(), r, -1),
+		std::sregex_token_iterator()
+	};
+}
 
 std::string toLowerCase(std::string s) {
 	
@@ -41,4 +66,12 @@ std::string toLowerCase(std::string s) {
 		l += tolower(c);
 	}
 	return l;
+}
+
+std::string trim(std::string s) {
+	const std::string w = " \t\n\r\f\v";
+	std::string_view v(s);
+	v.remove_prefix(std::min(v.find_first_not_of(w), v.length()));
+	v.remove_suffix(std::min(v.length() - v.find_last_not_of(w) - 1, v.length()));
+	return std::string(v);
 }

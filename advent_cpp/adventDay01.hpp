@@ -43,9 +43,9 @@ class AdventDay01 : public AdventDay {
 		}
 	
 		int getCalibration(std::string s) {
-			std::vector<std::string> matches = findAll(s, regexNumWords);
-			std::transform(matches.cbegin(), matches.cend(), matches.begin(), toDigit);
-			return matches.empty() ? 0 : 10 * std::stoi(matches.front()) + std::stoi(matches.back());
+			std::vector<std::vector<std::string>> matches = findAll(s, regexNumWords);
+			std::transform(matches[0].cbegin(), matches[0].cend(), matches[0].begin(), toDigit);
+			return matches.empty() ? 0 : 10 * std::stoi(matches[0].front()) + std::stoi(matches[0].back());
 		}
 
 	

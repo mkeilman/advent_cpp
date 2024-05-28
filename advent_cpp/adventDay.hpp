@@ -23,10 +23,6 @@ class AdventDay {
 	protected:
 		std::string inputFile;
 	
-		void printStrings(std::vector<std::string> v) {
-			std::cout << "[" << join(v) << "]\n";
-		}
-	
 	public:
 		AdventDay(int day);
 	
