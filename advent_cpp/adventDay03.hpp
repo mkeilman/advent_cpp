@@ -24,13 +24,9 @@ class Grid {
 		std::vector<std::string> _parts(std::string str) {
 			std::vector<std::string> pp;
 			std::vector<std::vector<std::string>> v = findAll(str, std::regex(R"***(\D*(\d+)\D*)***"));
-			//std::cout << "PARTS STR " << str << " N P" << v.size() << '\n';
 			for (std::vector<std::string> vs: v) {
-				//printStrings(vs);
-				//std::cout << vs[0] << " ";
 				pp.push_back(vs[0]);
 			}
-			//std::cout << '\n';
 			return pp.size() ? pp : std::vector<std::string>();
 		}
 	

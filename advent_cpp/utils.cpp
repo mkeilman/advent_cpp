@@ -44,12 +44,28 @@ ptrdiff_t indexOf(std::string s, std::vector<std::string> v, unsigned long start
 	return std::distance(v.begin() + start, find(v.begin() + start, v.end(), s));
 }
 
-void print()  {
-	
+void print(std::string s)  {
+	std::cout << s << '\n';
 }
 
-void printStrings(std::vector<std::string> v) {
-	std::cout << "[" << join(v) << "]\n";
+void print(std::vector<std::string> v) {
+	print(toString(v));
+}
+
+void print(std::map<std::string, int> m) {
+	print(toString(m));
+}
+
+std::vector<int> range(int min, int max) {
+	std::vector<int> r;
+	
+	if (max < min) {
+		throw std::runtime_error(std::format("Max {} < min {}", max, min));
+	}
+	for (int i = min; i < max; ++i) {
+		r.push_back(i);
+	}
+	return r;
 }
 
 std::vector<std::string> reSplit(std::regex r, std::string s) {
@@ -66,6 +82,19 @@ std::string toLowerCase(std::string s) {
 		l += tolower(c);
 	}
 	return l;
+}
+
+std::string toString(std::vector<std::string> v) {
+	return "[" + join(v) + "]";
+}
+
+std::string toString(std::map<std::string, int> m) {
+	std::string s = "{";
+	for (auto &[k, v]: m) {
+		s += (k + ":" + std::format("{}", v) + ",");
+	}
+	s += "}";
+	return s;
 }
 
 std::string trim(std::string s) {

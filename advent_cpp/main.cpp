@@ -9,6 +9,7 @@
 #include "adventDay01.hpp"
 #include "adventDay02.hpp"
 #include "adventDay03.hpp"
+#include "adventDay04.hpp"
 #include <iostream>
 
 void usage() {
@@ -28,7 +29,8 @@ int main(int argc, const char * argv[]) {
 	//AdventDay *d = new AdventDay(std::stoi(argv[1]));
 	//AdventDay01 *d = new AdventDay01();
 	//AdventDay02 *d = new AdventDay02();
-	AdventDay03 *d = new AdventDay03();
+	//AdventDay03 *d = new AdventDay03();
+	AdventDay04 *d = new AdventDay04();
 	d->runFromTestStrings();
 	d->runFromFile();
 	

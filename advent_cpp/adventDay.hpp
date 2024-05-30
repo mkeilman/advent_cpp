@@ -27,7 +27,7 @@ class AdventDay {
 		AdventDay(int day);
 	
 		virtual void run(std::vector<std::string> v) {
-			printStrings(v);
+			print(v);
 		}
 	
 		void runFromTestStrings() {
